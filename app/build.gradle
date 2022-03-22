@@ -1,0 +1,92 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "jp.youmalink.salesforce_marketing_cloud_sample"
+        minSdk 28
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+
+        def properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        // local.propertiesの定義されている値を読み込む
+        def PUSH_ACCESS_TOKEN = properties.getProperty("push_access_token")
+        buildConfigField("String", "PUSH_ACCESS_TOKEN", "\"${PUSH_ACCESS_TOKEN}\"")
+
+        def PUSH_APP_ID = properties.getProperty("push_app_id")
+        buildConfigField("String", "PUSH_APP_ID", "\"${PUSH_APP_ID}\"")
+
+        def PUSH_CLOUD_SERVER_URL = properties.getProperty("push_cloud_server_url")
+        buildConfigField("String", "PUSH_CLOUD_SERVER_URL", "\"${PUSH_CLOUD_SERVER_URL}\"")
+
+        def PUSH_MID = properties.getProperty("push_mid")
+        buildConfigField("String", "PUSH_MID", "\"${PUSH_MID}\"")
+
+        def SENDER_ID = properties.getProperty("sender_id")
+        buildConfigField("String", "SENDER_ID", "\"${SENDER_ID}\"")
+
+        def CUSTOM_KEY_A = properties.getProperty("key_a")
+        buildConfigField("String", "CUSTOM_KEY_A", "\"${CUSTOM_KEY_A}\"")
+
+        def CUSTOM_KEY_B = properties.getProperty("key_b")
+        buildConfigField("String", "CUSTOM_KEY_B", "\"${CUSTOM_KEY_B}\"")
+
+        def CUSTOM_KEY_C = properties.getProperty("key_c")
+        buildConfigField("String", "CUSTOM_KEY_C", "\"${CUSTOM_KEY_C}\"")
+
+        def CUSTOM_KEY_D = properties.getProperty("key_d")
+        buildConfigField("String", "CUSTOM_KEY_D", "\"${CUSTOM_KEY_D}\"")
+
+        def CUSTOM_KEY_E = properties.getProperty("key_e")
+        buildConfigField("String", "CUSTOM_KEY_E", "\"${CUSTOM_KEY_E}\"")
+
+        def CUSTOM_KEY_F = properties.getProperty("key_f")
+        buildConfigField("String", "CUSTOM_KEY_F", "\"${CUSTOM_KEY_F}\"")
+
+        def CUSTOM_KEY_G = properties.getProperty("key_g")
+        buildConfigField("String", "CUSTOM_KEY_G", "\"${CUSTOM_KEY_G}\"")
+
+        def CUSTOM_KEY_H = properties.getProperty("key_h")
+        buildConfigField("String", "CUSTOM_KEY_H", "\"${CUSTOM_KEY_H}\"")
+
+        def CUSTOM_KEY_I = properties.getProperty("key_i")
+        buildConfigField("String", "CUSTOM_KEY_I", "\"${CUSTOM_KEY_I}\"")
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
+    implementation 'com.salesforce.marketingcloud:marketingcloudsdk:8.0.4'
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+}
