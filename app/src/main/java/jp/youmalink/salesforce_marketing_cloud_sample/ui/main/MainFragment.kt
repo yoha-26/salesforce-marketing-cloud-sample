@@ -11,6 +11,7 @@ import android.widget.TextView
 import com.salesforce.marketingcloud.sfmcsdk.SFMCSdk
 import jp.youmalink.salesforce_marketing_cloud_sample.BuildConfig
 import jp.youmalink.salesforce_marketing_cloud_sample.R
+import jp.youmalink.salesforce_marketing_cloud_sample.SecondActivity
 
 class MainFragment : Fragment() {
 
@@ -28,6 +29,9 @@ class MainFragment : Fragment() {
     ): View {
         val rootView = inflater.inflate(R.layout.main_fragment, container, false)
         textView = rootView.findViewById(R.id.message)
+        rootView.findViewById<View>(R.id.btn_next_screen).setOnClickListener {
+            SecondActivity.start(requireContext())
+        }
         return rootView
     }
 
@@ -35,6 +39,10 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         sendAttribute()
+    }
+
+    override fun onResume() {
+        super.onResume()
         getAndShowAttributes()
     }
 
@@ -42,15 +50,29 @@ class MainFragment : Fragment() {
         SFMCSdk.requestSdk { sdk ->
             sdk.identity.run {
                 // Set Attribute value
-                setProfileAttribute(BuildConfig.CUSTOM_KEY_A, "false")
-                setProfileAttribute(BuildConfig.CUSTOM_KEY_B, "true")
-                setProfileAttribute(BuildConfig.CUSTOM_KEY_C, "true")
-                setProfileAttribute(BuildConfig.CUSTOM_KEY_D, "true")
-                setProfileAttribute(BuildConfig.CUSTOM_KEY_E, "true")
-                setProfileAttribute(BuildConfig.CUSTOM_KEY_F, "true")
-                setProfileAttribute(BuildConfig.CUSTOM_KEY_G, "true")
-                setProfileAttribute(BuildConfig.CUSTOM_KEY_H, "true")
-                setProfileAttribute(BuildConfig.CUSTOM_KEY_I, "true")
+                // setProfileAttribute(BuildConfig.CUSTOM_KEY_A, "false")
+                // setProfileAttribute(BuildConfig.CUSTOM_KEY_B, "true")
+                // setProfileAttribute(BuildConfig.CUSTOM_KEY_C, "true")
+                // setProfileAttribute(BuildConfig.CUSTOM_KEY_D, "true")
+                // setProfileAttribute(BuildConfig.CUSTOM_KEY_E, "true")
+                // setProfileAttribute(BuildConfig.CUSTOM_KEY_F, "true")
+                // setProfileAttribute(BuildConfig.CUSTOM_KEY_G, "true")
+                // setProfileAttribute(BuildConfig.CUSTOM_KEY_H, "true")
+                // setProfileAttribute(BuildConfig.CUSTOM_KEY_I, "true")
+                setProfileAttributes(
+                    mapOf(
+                        BuildConfig.CUSTOM_KEY_A to "false",
+                        BuildConfig.CUSTOM_KEY_A to "false",
+                        BuildConfig.CUSTOM_KEY_B to "true",
+                        BuildConfig.CUSTOM_KEY_C to "true",
+                        BuildConfig.CUSTOM_KEY_D to "true",
+                        BuildConfig.CUSTOM_KEY_E to "true",
+                        BuildConfig.CUSTOM_KEY_F to "true",
+                        BuildConfig.CUSTOM_KEY_G to "true",
+                        BuildConfig.CUSTOM_KEY_H to "true",
+                        BuildConfig.CUSTOM_KEY_I to "true"
+                    )
+                )
             }
         }
     }
